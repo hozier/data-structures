@@ -1,0 +1,49 @@
+
+**ADVANCE (dogArray[ R ]) =  3 
+
+
+**ADVANCE (dogArray[ S ]) =  6 
+
+
+**ADVANCE (dogArray[ F ]) =  8 
+
+_____________________________________________________
+
+**ADVANCE (dogArray[R]) += 1 equates to: 3 + 1->4
+
+
+**ADVANCE (dogArray[S]) += 6 equates to: 6 + 6->12
+
+
+**ADVANCE (dogArray[F]) += 11 equates to: 8 + 11->19
+
+_____________________________________________________
+
+**ADVANCE (dogArray[R]) += 6 equates to: 4 + 6->10
+
+
+**ADVANCE (dogArray[S]) += 5 equates to: 12 + 5->17
+
+
+**ADVANCE (dogArray[F]) += 11 equates to: 19 + 11->30
+
+_____________________________________________________
+
+**ADVANCE (dogArray[R]) += 7 equates to: 10 + 7->17
+
+
+**ADVANCE (dogArray[S]) += 7 equates to: 17 + 7->24
+
+
+**ADVANCE (dogArray[F]) += 11 equates to: 30 + 11->41
+
+_____________________________________________________
+
+**ADVANCE (dogArray[R]) += 9 equates to: 17 + 9->26
+
+
+**ADVANCE (dogArray[S]) += 9 equates to: 24 + 9->33
+
+
+**ADVANCE (dogArray[F]) += 11 equates to: 41 + 11->52
+
