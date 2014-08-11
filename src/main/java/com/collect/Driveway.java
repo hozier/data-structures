@@ -27,7 +27,7 @@ public class Driveway {
                 System.out.printf("[+ NUMBERS = ADD][- NUMBERS = REMOVE][0 = STOP] ");
 
                 in = new Scanner(System.in); // inside
-                int n = in.nextInt(), i = 0;
+                int n = in.nextInt();
                 boolean found = false;
                 if( n == 0){
                     done = true;
@@ -35,44 +35,41 @@ public class Driveway {
                 else if(n > 0){ the_bklyn_valet.driveway_stack.push(n);
 
                 }else { n = Math.abs(n); //while(!found){
-                    System.out.println("n +/- " + n);
 
                     while(!the_bklyn_valet.driveway_stack.empty()) {
 
                         the_bklyn_valet.street_stack.push(the_bklyn_valet.driveway_stack.pop());
-                      //  System.out.println("the_bklyn_valet.street_stack.get(i) = " + the_bklyn_valet.street_stack.get(i));
 
-                        if(the_bklyn_valet.street_stack.get(i) == n){
+                        if(the_bklyn_valet.street_stack.peek() == n){
 
                             found = true;
-                            System.out.println( "removed " + the_bklyn_valet.street_stack.get(i));
-                            the_bklyn_valet.street_stack.remove(i);
+                            System.out.printf( "[REMOVED %s]", the_bklyn_valet.street_stack.peek());
+                            the_bklyn_valet.street_stack.pop();
                             break;
                         }
-                        i++;
 
                     }   if (!found){
-                        System.out.printf("Car %d not found. \n", n);}
+                        System.out.printf("[Car %d not found]", n);}
 
-                    while (!the_bklyn_valet.street_stack.empty()){ the_bklyn_valet.driveway_stack.push(the_bklyn_valet.street_stack.pop()); }
-                    System.out.println("repacked_street_stack = " + String.valueOf(the_bklyn_valet.driveway_stack));
+                        while (!the_bklyn_valet.street_stack.empty()){ the_bklyn_valet.driveway_stack.push(the_bklyn_valet.street_stack.pop()); }
                 }
             }
             catch (InputMismatchException exception){
-                System.out.printf("invalid_input=%s\n\n", exception.toString());//
+                System.out.printf("invalid_input=%s\n\n", exception.toString());
             }
 
+            System.out.printf("%s\n\n", String.valueOf(the_bklyn_valet));
 
         }
 
-
-
-//        while (!the_bklyn_valet.driveway_stack.empty()){
-//
-//        }
     }
 
     public static void main(){
         Driveway.retrieve_vehicle();
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s[driveway_stack=%s][street_stack=%s]", getClass().getName(), driveway_stack, street_stack);
     }
 }
