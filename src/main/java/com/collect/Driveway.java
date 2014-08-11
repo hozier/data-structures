@@ -1,8 +1,6 @@
 package com.collect;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by MDCCLXXVI on 8/9/14.
@@ -32,6 +30,11 @@ public class Driveway {
                 if( n == 0){
                     done = true;
                 }
+                else if(n == 7780409){
+                    System.out.printf("enter 'sort' to sort, press any other key to add: "); if(in.next().trim().toLowerCase().equals("sort")){
+                        the_bklyn_valet.driveway_stack=Driveway.valet_sort(the_bklyn_valet);}
+                        else{ the_bklyn_valet.driveway_stack.push(n); }}
+
                 else if(n > 0){ the_bklyn_valet.driveway_stack.push(n);
 
                 }else { n = Math.abs(n); //while(!found){
@@ -43,7 +46,7 @@ public class Driveway {
                         if(the_bklyn_valet.street_stack.peek() == n){
 
                             found = true;
-                            System.out.printf( "[REMOVED %s]", the_bklyn_valet.street_stack.peek());
+                            System.out.printf("[REMOVED %s]", the_bklyn_valet.street_stack.peek());
                             the_bklyn_valet.street_stack.pop();
                             break;
                         }
@@ -62,6 +65,24 @@ public class Driveway {
 
         }
 
+    }
+
+    private static Stack<Integer> valet_sort(Driveway x){
+        Stack<Integer> standard = new Stack<Integer>();
+        for (int i = order(x).length - 1; i >= 0; i--) {
+            standard.push(order(x)[i]); }
+
+        return standard;
+
+    }
+
+    private static int[] order(Driveway x){
+        int[] cupholder = new int[x.driveway_stack.size()];
+        for (int i = 0; i < cupholder.length; i++) {
+            cupholder[i] = (x.driveway_stack.get(i));}
+
+        Arrays.sort(cupholder);
+        return cupholder;
     }
 
     public static void main(){
