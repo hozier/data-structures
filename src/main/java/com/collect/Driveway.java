@@ -21,7 +21,6 @@ public class Driveway {
         Driveway the_bklyn_valet = new Driveway();
         Scanner in;
         boolean done = false;
-        boolean found = false;
 
         while(!done){
             try{
@@ -29,6 +28,7 @@ public class Driveway {
 
                 in = new Scanner(System.in); // inside
                 int n = in.nextInt(), i = 0;
+                boolean found = false;
                 if( n == 0){
                     done = true;
                 }
