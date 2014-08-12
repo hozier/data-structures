@@ -70,16 +70,17 @@ public class Driveway {
     private static Stack<Integer> valet_sort(Driveway x){
         Stack<Integer> standard = new Stack<Integer>();
         for (int i = order(x).length - 1; i >= 0; i--) {
-            standard.push(order(x)[i]); }
+            standard.push(order(x)[i]);
+        }
 
         return standard;
-
     }
 
     private static int[] order(Driveway x){
         int[] cupholder = new int[x.driveway_stack.size()];
         for (int i = 0; i < cupholder.length; i++) {
-            cupholder[i] = (x.driveway_stack.get(i));}
+            cupholder[i] = (x.driveway_stack.get(i));
+        }
 
         Arrays.sort(cupholder);
         return cupholder;
