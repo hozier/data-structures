@@ -42,7 +42,8 @@ public class Main extends JFrame { // we use sxtends to create more specialised 
         final Aguatic  a = new Aguatic(9.0, 3.0);
         final Tile stewie = new Tile();
 
-        DogTag.main();
+        TheLedger.main();
+        //DogTag.main();
         Driveway.main();
         ListDemo.main_2();
         ListDemo.main_3();
@@ -163,7 +164,7 @@ public class Main extends JFrame { // we use sxtends to create more specialised 
 
 
         reverse$d$();
-        c.DogTrack(47);
+        //c.DogTrack(47);
 
 
 
@@ -1178,6 +1179,7 @@ public class Main extends JFrame { // we use sxtends to create more specialised 
         }
     }
 
+    /*8888
     public static void DogTrack(int N) throws FileNotFoundException {
         String []track = new String [N];
         String []autofill = {"F", "S", "R"};
@@ -1236,7 +1238,7 @@ public class Main extends JFrame { // we use sxtends to create more specialised 
      *
      * @param dogArray collection of dog objects
      * @param i represents a specific canine at ith index
-     */
+     */  /*
     private static void drone(DogTag []dogArray, int i){
         if(!dogArray[i].track[reset(dogArray[i].lucky, dogArray[i].x)].equals("o")){dogArray[i].track[reset(dogArray[i].lucky, dogArray[i].x)] += dogArray[i].init;}
         else{dogArray[i].track[reset(dogArray[i].lucky, dogArray[i].x)] = dogArray[i].init;}
@@ -1311,7 +1313,7 @@ public class Main extends JFrame { // we use sxtends to create more specialised 
         }
 
         dogArray[0].accountant.print(line+"\n");
-    }
+    }  **********88888*/
 
     public static void url() throws IOException {
         String str = "https://www.google.com/search?q=hello+world";

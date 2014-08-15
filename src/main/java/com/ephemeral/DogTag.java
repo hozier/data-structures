@@ -9,11 +9,11 @@ import java.util.Arrays;
  */
 public class DogTag {
 
-    public DogTag(int lucky, int CONST, String initial, String []track){
+    public DogTag(int lucky, int CONST, String initial, String track[][]){
         this.lucky = lucky;
         this.x = CONST;
         this.init = initial;
-        this.track = track;
+        this.track =  track;
         try{ accountant = new PrintWriter("movement.txt"); }
         catch( FileNotFoundException exception ) { System.out.println(exception); }
     }
@@ -24,7 +24,10 @@ public class DogTag {
     }
 
     public static void DogTrack(int N){
-        String []track = new String [N];
+for (String[] i : track){
+    track[0] = new String[N];
+}
+
         String []autofill = {"F", "S", "R"};
         DogTag []dogArray = new DogTag[autofill.length];
         String []imagination = reimagine(autofill);
@@ -33,13 +36,6 @@ public class DogTag {
         System.out.println(Arrays.toString(imagination)+"\n");
 
         boolean HALT = false;
-
-
-
-        for (int i = 0; i < N; i++) { //initialize array with
-            track[i] = "o";
-        }
-
 
         for (int i = 0; i < dogArray.length; i++) { // automate creation of ∑i DogTag objects
             int advance =(int)((Math.random() * N)/4)+1; //new position created
@@ -83,43 +79,65 @@ public class DogTag {
      * @param i represents a specific canine at ith index
      */
     private static void drone(DogTag []dogArray, int i){
-        if(!dogArray[i].track[reset(dogArray[i].lucky, dogArray[i].x)].equals("o")){dogArray[i].track[reset(dogArray[i].lucky, dogArray[i].x)] += dogArray[i].init;}
-        else{dogArray[i].track[reset(dogArray[i].lucky, dogArray[i].x)] = dogArray[i].init;}
-        System.out.println(Arrays.toString(dogArray[i].track));
+        set_o();
+        int classified = reset(dogArray, i);
+        if(!dogArray[i].track[i][classified].equals("o")){dogArray[i].track[i][classified] += dogArray[i].init;}
+        else{dogArray[i].track[i][classified] = dogArray[i].init;}
+        System.out.println(Arrays.toString(dogArray[i].track[i]));
     }
 
+
+    private static void the_ledger(DogTag[] dogArray, int i, int advance, int capture){
+        String add_on=""; if(dogArray[i].lucky == 0){add_on = " (Oops!)";}
+        dogArray[0].accountant.println("\n**ADVANCE (dogArray["+ dogArray[i].init + "]) += "+ advance + " equates to: "+ capture +" + " + advance + "->"+dogArray[i].lucky+add_on+"\n");
+
+    }
     private static boolean central_intelligence(DogTag[] dogArray, int i){
         boolean fall = false;
         int advance = (int)((Math.random() * dogArray[i].x)/4)+1;
-        int capture = dogArray[i].lucky;
+        int capture = dogArray[i].lucky; if(dogArray[i].isReset){}
+
         //PrintWriter ledger = new PrintWriter("movement.txt");
 
 
         dogArray[i].lucky += advance; //new position created
-        dogArray[0].accountant.println("\n**ADVANCE (dogArray["+ dogArray[i].init + "]) += "+ advance + " equates to: "+capture +" + " +advance + "->"+dogArray[i].lucky+"\n");
+
 
         if(dogArray[i].lucky <dogArray[i].x){
+            //int capture = reset(dogArray[i].lucky, dogArray[i].x);
+
 
             drone(dogArray, i);
 
         }
-        else if (dogArray[i].lucky >=dogArray[i].x){
+        if(dogArray[i].lucky >=dogArray[i].x){
             // if new position is greater than array size, return true to stop advancements
             // immediately: object at ith element wins.
-            dogArray[i].track[dogArray[i].x -1] = dogArray[i].init;
-            System.out.println(Arrays.toString(dogArray[i].track));
+            dogArray[i].track[i][dogArray[i].x -1] = dogArray[i].init;
+            System.out.println(Arrays.toString(dogArray[i].track[i]));
             initToName(dogArray, i); fall = true; }//break;}
 
+        the_ledger(dogArray, i, advance, capture);
 
 
 
         return fall;
     }
 
+    private static void set_o(){
+        for (int i = 0; i < track.length; i++) { //initialize array with
 
-    private static int reset (int lucky, int x){
-        if(lucky == x/3 || lucky == (2*x)/3){ lucky = 0;}
-        return lucky;
+            for (int j = 0; j < track[i].length; j++) {
+                track[i][j] = "o";
+            }
+        }
+    }
+
+    private static int reset (DogTag[] dogArray, int i){
+
+        if(dogArray[i].lucky == dogArray[i].x/3 || dogArray[i].lucky == (2*dogArray[i].x)/3){ dogArray[i].lucky = 0; dogArray[i].isReset = true;}
+
+        return dogArray[i].lucky;
     }
 
     private static String[] reimagine(String []autofill){
@@ -151,17 +169,19 @@ public class DogTag {
         System.out.println(dogArray[i].init+" wins!");
     }
 
+
+
     private static void draw(DogTag[] dogArray, int adv_lngth){
         String line="";
         for (int i = 0; i < adv_lngth; i++) {
             line+="_";
         }
-
+        System.out.println(line+"\n");
         dogArray[0].accountant.print(line+"\n");
     }
 
     public static void main(){
-        DogTag.DogTrack(47);
+        DogTag.DogTrack(27);
     }
 
 
@@ -169,8 +189,8 @@ public class DogTag {
 
 
     protected PrintWriter accountant;
-    protected int lucky, x;
+    protected static int lucky, x, previous_index = 0; boolean isReset;
     protected String init;
-    protected String [] track;
+    protected static String [][] track = new String[3][];
 
 }
