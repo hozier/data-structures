@@ -58,6 +58,7 @@ public class StringBag {
     }
 
     public static void main(String[] args){
+        List<String> hold = new LinkedList(); // additional code, not required.
         StringBag stewie = new StringBag();
 
         stewie.bookkeeper.add("Mary");
@@ -68,13 +69,17 @@ public class StringBag {
         System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
 
 
-        stewie.remove(3);
+        hold.add(stewie.remove(3));
         System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
 
-        stewie.remove(7);
+        hold.add(stewie.remove(7));
 
-        stewie.remove(2);
+        hold.add(stewie.remove(2));
         System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+        for(String leftover:hold){  if(!leftover.contains("Error:")){ stewie.bookkeeper.add(leftover); }  }
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+
+
 
     }
 
