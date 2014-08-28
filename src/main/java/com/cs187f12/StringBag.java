@@ -8,7 +8,7 @@ import java.util.ListIterator;
  * Created by MDCCLXXVI on 8/27/14.
  */
 public class StringBag {
-    StringBag(){
+    public StringBag(){
         bookkeeper = new LinkedList<String>();
     }
 
@@ -25,9 +25,22 @@ public class StringBag {
         return bookkeeper.get(bookkeeper.size()-1)==null;
     }
 
+    public int size(){
+        return bookkeeper.size();
+    }
+
     @Override
     public String toString(){
         return String.format("%s[linkedlist=%s]",getClass().getName(),bookkeeper);
+    }
+
+    public String remove(){
+        ListIterator<String> iter = bookkeeper.listIterator();
+        int random = (int)(Math.random()*bookkeeper.size());
+        System.out.println("\n\n***RANDOM = " + random);
+        String retrieve = bookkeeper.get(random);
+        int i = -1; while (i<random){ i++; iter.next(); } iter.remove();
+        return retrieve;
     }
 
     public String remove(int x){
@@ -64,6 +77,8 @@ public class StringBag {
         System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
 
     }
+
+
 
 
     List<String> bookkeeper;
