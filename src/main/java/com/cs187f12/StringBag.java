@@ -1,6 +1,5 @@
 package com.cs187f12;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,21 +12,57 @@ public class StringBag {
         bookkeeper = new LinkedList<String>();
     }
 
+    public void insert(String ctrl){
+        bookkeeper.add(ctrl);
+    }
+
+    public void clear(){
+        bookkeeper.clear();
+    }
+
+    public boolean isFull(){
+        if (bookkeeper.size() == 0){ throw new NullPointerException(); }
+        return bookkeeper.get(bookkeeper.size()-1)==null;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s[linkedlist=%s]",getClass().getName(),bookkeeper);
+    }
+
     public String remove(int x){
         ListIterator<String> iter = bookkeeper.listIterator();
-        String retrieve = "Error: Invalid index. "; 
+        String retrieve = "Error: Invalid index. ";
 
         try {
-            for (int i = 0; i < bookkeeper.size(); i++) {
-                retrieve = iter.next();
-                if(i == x){break;}
-            }
-            iter.remove();
+            retrieve = bookkeeper.get(x); //bookkeeper.remove(x);
+            int i = -1; while (i<x){ i++; iter.next(); } iter.remove();
         }
-        catch (ArrayIndexOutOfBoundsException exception){
-            exception.printStackTrace();
+        catch (IndexOutOfBoundsException exception){
+            System.out.printf("Invalid index: %s\n", exception);
         }
         return retrieve;
+    }
+
+    public static void main(String[] args){
+        StringBag stewie = new StringBag();
+
+        stewie.bookkeeper.add("Mary");
+        stewie.bookkeeper.add("had");
+        stewie.bookkeeper.add("a");
+        stewie.bookkeeper.add("little");
+        stewie.bookkeeper.add("lamb.");
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+
+
+        stewie.remove(3);
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+
+        stewie.remove(7);
+
+        stewie.remove(2);
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+
     }
 
 
