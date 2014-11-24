@@ -1448,7 +1448,7 @@ public class Main extends JFrame { // we use sxtends to create more specialised 
             return "";
         }
         return thread.charAt(thread.length() - 1) + recursively_reverse(
-                                                                            thread.substring(
+                                                                                    thread.substring(
                                                                                                 0,thread.length()-1));
                                                                                                 // each recursive call:
                                                                                                 // 0 ==> the NEW LENGTH

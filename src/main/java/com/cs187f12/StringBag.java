@@ -21,7 +21,7 @@ public class StringBag {
     }
 
     public boolean isFull(){
-        if (bookkeeper.size() == 0){ throw new NullPointerException(); }
+        if (bookkeeper.size() == 0){ return false;}
         return bookkeeper.get(bookkeeper.size()-1)==null;
     }
 
@@ -34,7 +34,7 @@ public class StringBag {
         return String.format("%s[linkedlist=%s]",getClass().getName(),bookkeeper);
     }
 
-    public String remove(){
+    public String remove(){ //randomizes kth selection // return selected
         ListIterator<String> iter = bookkeeper.listIterator();
         int random = (int)(Math.random()*bookkeeper.size());
         System.out.println("\n\n***RANDOM = " + random);
@@ -58,7 +58,7 @@ public class StringBag {
     }
 
     public static void main(String[] args){
-        List<String> hold = new LinkedList(); // additional code, not required.
+        List<String> hold = new LinkedList<String>(); // additional code, not required.
         StringBag stewie = new StringBag();
 
         stewie.bookkeeper.add("Mary");
@@ -79,6 +79,27 @@ public class StringBag {
         for(String leftover:hold){  if(!leftover.contains("Error:")){ stewie.bookkeeper.add(leftover); }  }
         System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
 
+        hold.clear();
+        hold.add(stewie.remove(3));
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+
+        hold.add(stewie.remove(7));
+
+        hold.add(stewie.remove(2));
+        hold.add(stewie.remove(9));
+        hold.add(stewie.remove(0));
+        hold.add(stewie.remove(1));
+        hold.add(stewie.remove(0));
+        hold.add(stewie.remove(0));
+        hold.add(stewie.remove(1));
+        hold.add(stewie.remove(9));
+        hold.add(stewie.remove(0));
+        hold.add(stewie.remove(2));
+        hold.add(stewie.remove(1));
+
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
+        for(String leftover:hold){  if(!leftover.contains("Error:")){ stewie.bookkeeper.add(leftover); }  }
+        System.out.println("stewie.bookkeeper.toString() = " + stewie.bookkeeper.toString());
 
 
     }
